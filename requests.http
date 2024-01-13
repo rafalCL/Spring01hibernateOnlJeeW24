@@ -1,6 +1,5 @@
 ###
 POST http://localhost:8080/HiberApp/book/create?title=potop&rating=8&description=dobre
 
-
-
 ###
+POST http://localhost:8080/HiberApp/book/createWithPublisher?title=potop&rating=8&description=dobre&publisherName=Ossolineum

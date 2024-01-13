@@ -11,6 +11,8 @@ public class Book {
     private String title;
     private int rating;
     private String description;
+    @ManyToOne
+    private Publisher publisher;
 
     public Book() {
 
@@ -50,6 +52,14 @@ public class Book {
         this.description = description;
     }
 
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -57,6 +67,7 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
+                ", publisher=" + publisher +
                 '}';
     }
 }
