@@ -12,6 +12,16 @@ public class Book {
     private int rating;
     private String description;
 
+    public Book() {
+
+    }
+
+    public Book(String title, int rating, String description) {
+        this.title = title;
+        this.rating = rating;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
@@ -38,5 +48,15 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", rating=" + rating +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
