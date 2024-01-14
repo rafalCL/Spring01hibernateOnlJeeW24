@@ -109,4 +109,9 @@ public class BookController {
     public List<Publisher> publishers() {
         return publisherDao.findAll();
     }
+
+    @ModelAttribute(name = "authors")
+    public List<Author> authors() {
+        return authorDao.findAll();
+    }
 }

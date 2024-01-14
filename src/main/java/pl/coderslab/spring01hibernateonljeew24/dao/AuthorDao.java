@@ -3,10 +3,12 @@ package pl.coderslab.spring01hibernateonljeew24.dao;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.spring01hibernateonljeew24.entity.Author;
+import pl.coderslab.spring01hibernateonljeew24.entity.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -25,8 +27,12 @@ public class AuthorDao {
 
     public Author findByIdWithBooks(long id) {
         Author result = entityManager.find(Author.class, id);
-        Hibernate.initialize(result.getBooks()); // todo fix load
+//        Hibernate.initialize(result.getBooks()); // todo fix load
 
         return result;
+    }
+
+    public List<Author> findAll() {
+        return entityManager.createQuery("SELECT e FROM Author e").getResultList();
     }
 }

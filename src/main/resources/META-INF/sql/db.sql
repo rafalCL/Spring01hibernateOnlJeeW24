@@ -8,3 +8,8 @@ INSERT INTO publishers(id, name) VALUES
     (default, 'PWN'),
     (default, 'Ossolineum'),
     (default, 'WNT');
+
+INSERT INTO authors(id, name) VALUES
+                                     (default, 'Mickiewicz'),
+                                     (default, 'Sienkiewicz'),
+                                     (default, 'Prus');
