@@ -9,7 +9,7 @@
     <h2>${listHeader}</h2>
     <div>
         <c:forEach items="${books}" var="book">
-            <div>${book} <a href="editForm?id=${book.id}">edit</a> </div>
+            <div>${book} <a href="<c:url value="/book/editForm?id=${book.id}"/>">edit</a> </div>
         </c:forEach>
     </div>
 </body>
