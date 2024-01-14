@@ -104,4 +104,9 @@ public class BookController {
         bookDao.create(book);
         return "saved book: " + book.toString();
     }
+
+    @ModelAttribute(name = "publishers")
+    public List<Publisher> publishers() {
+        return publisherDao.findAll();
+    }
 }
