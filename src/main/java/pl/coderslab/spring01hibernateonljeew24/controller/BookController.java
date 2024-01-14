@@ -97,4 +97,11 @@ public class BookController {
         m.addAttribute("book", new Book());
         return "/book/addForm";
     }
+
+    @PostMapping("/addForm")
+    @ResponseBody
+    public String postAddForm(@ModelAttribute Book book) {
+        bookDao.create(book);
+        return "saved book: " + book.toString();
+    }
 }
