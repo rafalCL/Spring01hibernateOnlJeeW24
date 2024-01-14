@@ -1,6 +1,7 @@
 package pl.coderslab.spring01hibernateonljeew24.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -13,6 +14,8 @@ public class Book {
     private String description;
     @ManyToOne
     private Publisher publisher;
+    @ManyToMany
+    private List<Author> authors;
 
     public Book() {
 
@@ -60,6 +63,14 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -68,6 +79,7 @@ public class Book {
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
                 ", publisher=" + publisher +
+                ", authors=" + authors +
                 '}';
     }
 }

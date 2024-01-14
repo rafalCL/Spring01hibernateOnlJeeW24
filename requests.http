@@ -3,3 +3,6 @@ POST http://localhost:8080/HiberApp/book/create?title=potop&rating=8&description
 
 ###
 POST http://localhost:8080/HiberApp/book/createWithPublisher?title=potop&rating=8&description=dobre&publisherName=Ossolineum
+
+###
+POST http://localhost:8080/HiberApp/book/createWithAuthors?title=potop&rating=8&description=dobre&authorsCsv=Ala,Makota
