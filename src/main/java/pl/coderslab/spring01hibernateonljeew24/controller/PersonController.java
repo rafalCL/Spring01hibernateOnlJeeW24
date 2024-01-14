@@ -28,7 +28,15 @@ public class PersonController {
     @GetMapping("/addFormBind")
     public String addFormBind(Model m) {
         m.addAttribute("person", new Person());
+//        String[] hobbies = {"nauka Javy", "programowanie", "bieganie", "żeglowanie"};
+//        m.addAttribute("hobbies", hobbies);
         return "/person/addFormBind";
+    }
+
+    @ModelAttribute(name = "hobbies")
+    public String[] hobbies() {
+        String[] hobbies = {"nauka Javy", "programowanie", "bieganie", "żeglowanie"};
+        return hobbies;
     }
 
     @PostMapping("/addFormBind")

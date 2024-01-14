@@ -2,14 +2,15 @@ package pl.coderslab.spring01hibernateonljeew24.entity;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
     private String password;
     private String email;
+    private String[] hobbies;
 
     public Person() {
 
@@ -47,6 +48,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String[] getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
     }
 
     @Override
