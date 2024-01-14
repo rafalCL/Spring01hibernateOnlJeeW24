@@ -83,7 +83,7 @@ public class Book {
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
                 ", publisher=" + publisher +
-                ", authors=" + authors +
+//                ", authors=" + authors +
                 '}';
     }
 }

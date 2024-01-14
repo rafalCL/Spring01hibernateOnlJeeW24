@@ -10,8 +10,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-//    @ManyToMany(mappedBy = "authors")
-//    private List<Book> books;
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
 
     public Author() {
 
@@ -37,13 +37,13 @@ public class Author {
         this.name = name;
     }
 
-//    public List<Book> getBooks() {
-//        return books;
-//    }
-//
-//    public void setBooks(List<Book> books) {
-//        this.books = books;
-//    }
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 
     @Override
     public String toString() {

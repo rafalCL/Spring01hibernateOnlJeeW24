@@ -27,7 +27,7 @@ public class AuthorDao {
 
     public Author findByIdWithBooks(long id) {
         Author result = entityManager.find(Author.class, id);
-//        Hibernate.initialize(result.getBooks()); // todo fix load
+        Hibernate.initialize(result.getBooks());
 
         return result;
     }

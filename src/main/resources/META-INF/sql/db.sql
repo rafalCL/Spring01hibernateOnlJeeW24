@@ -10,6 +10,6 @@ INSERT INTO publishers(id, name) VALUES
     (default, 'WNT');
 
 INSERT INTO authors(id, name) VALUES
-                                     (default, 'Mickiewicz'),
-                                     (default, 'Sienkiewicz'),
-                                     (default, 'Prus');
+     (default, 'Mickiewicz'),
+     (default, 'Sienkiewicz'),
+     (default, 'Prus');

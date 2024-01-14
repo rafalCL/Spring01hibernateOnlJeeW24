@@ -3,15 +3,7 @@ package pl.coderslab.spring01hibernateonljeew24.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.spring01hibernateonljeew24.dao.AuthorDao;
-import pl.coderslab.spring01hibernateonljeew24.dao.BookDao;
-import pl.coderslab.spring01hibernateonljeew24.dao.PublisherDao;
 import pl.coderslab.spring01hibernateonljeew24.entity.Author;
-import pl.coderslab.spring01hibernateonljeew24.entity.Book;
-import pl.coderslab.spring01hibernateonljeew24.entity.Publisher;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/author")
@@ -33,7 +25,16 @@ public class AuthorController {
     @GetMapping("/{id}")
     @ResponseBody
     public String getById(@PathVariable long id) {
-        Author entity = authorDao.findByIdWithBooks(id);
+        Author entity = authorDao.findById(id);
         return entity.toString(); // todo handle book NOT found exception
+    }
+
+    @GetMapping("/{id}/withBooks")
+    @ResponseBody
+    public String getByIdWithBooks(@PathVariable long id) {
+        Author entity = authorDao.findByIdWithBooks(id);
+        return String.format("<div>author: %s</div>\r\n<div>his books: %s</div>",
+                entity.toString(),
+                entity.getBooks()); // todo handle book NOT found exception
     }
 }
