@@ -108,10 +108,9 @@ public class BookController {
     }
 
     @PostMapping("/addForm")
-    @ResponseBody
     public String postAddForm(@ModelAttribute Book book) {
         bookDao.create(book);
-        return "saved book: " + book.toString();
+        return "redirect:/book";
     }
 
     @ModelAttribute(name = "publishers")
