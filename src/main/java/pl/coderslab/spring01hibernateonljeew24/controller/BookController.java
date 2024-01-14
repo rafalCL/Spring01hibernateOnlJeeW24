@@ -104,6 +104,7 @@ public class BookController {
     @GetMapping("/addForm")
     public String addForm(Model m) {
         m.addAttribute("book", new Book());
+        m.addAttribute("formHeader", "Add Book");
         return "/book/addOrEditForm";
     }
 
@@ -116,7 +117,14 @@ public class BookController {
     @GetMapping("/editForm")
     public String editForm(Model m, @RequestParam long id) {
         m.addAttribute("book", bookDao.findById(id));
+        m.addAttribute("formHeader", "Edit Book");
         return "/book/addOrEditForm";
+    }
+
+    @PostMapping("/editForm")
+    public String postEditForm(@ModelAttribute Book book) {
+        bookDao.update(book);
+        return "redirect:/book/" + book.getId();
     }
 
     @ModelAttribute(name = "publishers")

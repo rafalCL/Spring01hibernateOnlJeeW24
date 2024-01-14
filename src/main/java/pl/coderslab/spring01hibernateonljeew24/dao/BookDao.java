@@ -20,6 +20,10 @@ public class BookDao {
         return entity;
     }
 
+    public Book update(Book entity) {
+        return entityManager.merge(entity);
+    }
+
     public Book findById(long id) {
 //        return entityManager.find(Book.class, id);
         Query q = entityManager.createQuery("SELECT DISTINCT b FROM Book b JOIN FETCH b.authors WHERE b.id = :id");
