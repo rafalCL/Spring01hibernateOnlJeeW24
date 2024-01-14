@@ -76,4 +76,18 @@ public class BookController {
         Book book = bookDao.findById(id);
         return book.toString(); // todo handle book NOT found exception
     }
+
+    @GetMapping("")
+    @ResponseBody
+    public String getAll() {
+        List<Book> all = bookDao.findAll();
+        return all.toString();
+    }
+
+    @GetMapping("/withMinRating/{minRating}")
+    @ResponseBody
+    public String getByRatingGt(@PathVariable int minRating) {
+        List<Book> books = bookDao.findByRatingGt(minRating);
+        return books.toString();
+    }
 }

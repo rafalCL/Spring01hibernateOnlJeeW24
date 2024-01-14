@@ -9,3 +9,9 @@ POST http://localhost:8080/HiberApp/book/createWithAuthors?title=potop&rating=8&
 
 ###
 GET http://localhost:8080/HiberApp/author/1
+
+###
+GET http://localhost:8080/HiberApp/book
+
+###
+GET http://localhost:8080/HiberApp/book/withMinRating/7

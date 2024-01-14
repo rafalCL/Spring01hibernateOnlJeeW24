@@ -5,7 +5,9 @@ import pl.coderslab.spring01hibernateonljeew24.entity.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -20,5 +22,15 @@ public class BookDao {
 
     public Book findById(long id) {
         return entityManager.find(Book.class, id);
+    }
+
+    public List<Book> findAll() {
+        return entityManager.createQuery("SELECT b FROM Book b").getResultList();
+    }
+
+    public List<Book> findByRatingGt(int minRating) {
+        Query q = entityManager.createQuery("SELECT b FROM Book b WHERE b.rating >= :rating");
+        q.setParameter("rating", minRating);
+        return q.getResultList();
     }
 }
