@@ -25,11 +25,11 @@ public class BookDao {
     }
 
     public List<Book> findAll() {
-        return entityManager.createQuery("SELECT b FROM Book b").getResultList();
+        return entityManager.createQuery("SELECT DISTINCT b FROM Book b JOIN FETCH b.authors").getResultList();
     }
 
     public List<Book> findByRatingGt(int minRating) {
-        Query q = entityManager.createQuery("SELECT b FROM Book b WHERE b.rating >= :rating");
+        Query q = entityManager.createQuery("SELECT DISTINCT b FROM Book b JOIN FETCH b.authors WHERE b.rating >= :rating");
         q.setParameter("rating", minRating);
         return q.getResultList();
     }

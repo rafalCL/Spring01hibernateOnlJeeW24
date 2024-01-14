@@ -79,10 +79,19 @@ public class BookController {
     }
 
     @GetMapping("")
-    @ResponseBody
-    public String getAll() {
-        List<Book> all = bookDao.findAll();
-        return all.toString();
+    public String getAll(Model m) {
+        List<Book> books = bookDao.findAll();
+        m.addAttribute("listHeader", "All Books");
+        m.addAttribute("books", books);
+        return "/book/list";
+    }
+
+    @GetMapping("/good")
+    public String good(Model m) {
+        List<Book> books = bookDao.findByRatingGt(8);
+        m.addAttribute("listHeader", "Only Books with Rating Greather than or equal 8");
+        m.addAttribute("books", books);
+        return "/book/list";
     }
 
     @GetMapping("/withMinRating/{minRating}")
