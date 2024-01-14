@@ -1,6 +1,7 @@
 package pl.coderslab.spring01hibernateonljeew24.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.spring01hibernateonljeew24.dao.AuthorDao;
 import pl.coderslab.spring01hibernateonljeew24.dao.BookDao;
@@ -89,5 +90,11 @@ public class BookController {
     public String getByRatingGt(@PathVariable int minRating) {
         List<Book> books = bookDao.findByRatingGt(minRating);
         return books.toString();
+    }
+
+    @GetMapping("/addForm")
+    public String addForm(Model m) {
+        m.addAttribute("book", new Book());
+        return "/book/addForm";
     }
 }
