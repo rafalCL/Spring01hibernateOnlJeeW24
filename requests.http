@@ -6,3 +6,6 @@ POST http://localhost:8080/HiberApp/book/createWithPublisher?title=potop&rating=
 
 ###
 POST http://localhost:8080/HiberApp/book/createWithAuthors?title=potop&rating=8&description=dobre&authorsCsv=Ala,Makota
+
+###
+GET http://localhost:8080/HiberApp/author/1

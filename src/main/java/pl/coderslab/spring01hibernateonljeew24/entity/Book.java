@@ -79,7 +79,7 @@ public class Book {
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
                 ", publisher=" + publisher +
-                ", authors=" + authors +
+// todo uncomment to see stack overflow               ", authors=" + authors +
                 '}';
     }
 }
