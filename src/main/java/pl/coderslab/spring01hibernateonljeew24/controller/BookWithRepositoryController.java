@@ -146,6 +146,23 @@ public class BookWithRepositoryController {
         return "/book/list";
     }
 
+    @GetMapping("/byPublisher")
+    public String byPublisher(@RequestParam long publisherId, Model m) {
+        Publisher publisher = publisherDao.findById(publisherId);
+        List<Book> books = bookRepository.findAllByPublisher(publisher);
+        m.addAttribute("listHeader", "All Books where publisher is: " + publisher.getName());
+        m.addAttribute("books", books);
+        return "/book/list";
+    }
+
+    @GetMapping("/byPublisherId")
+    public String byPublisherId(@RequestParam long publisherId, Model m) {
+        List<Book> books = bookRepository.findAllByPublisherId(publisherId);
+        m.addAttribute("listHeader", "All Books where publisher id is: " + publisherId);
+        m.addAttribute("books", books);
+        return "/book/list";
+    }
+
     @ModelAttribute(name = "publishers")
     public List<Publisher> publishers() {
         return publisherDao.findAll();
