@@ -40,4 +40,14 @@ public class Person2Controller {
                 .collect(Collectors.joining(BR));
         return html + entities;
     }
+
+    @GetMapping("/byLogin")
+    public String byLogin(@RequestParam String login) {
+        Person2 entity = repo.findOneByLogin(login);
+        if(entity == null) {
+            return "Entity not found for login: " + login;
+        } else {
+            return entity.toString();
+        }
+    }
 }
