@@ -3,10 +3,7 @@ package pl.coderslab.spring01hibernateonljeew24.entity;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -26,6 +23,7 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
     @ManyToMany
+    @NotEmpty
     private List<Author> authors;
 
     public Book() {
