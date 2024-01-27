@@ -1,6 +1,12 @@
 package pl.coderslab.spring01hibernateonljeew24.entity;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -9,8 +15,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String title;
+    @Min(0)
+    @Max(10)
+//    @Range(min = 0, max = 10)
     private int rating;
+    @Size(max = 512)
     private String description;
     @ManyToOne
     private Publisher publisher;
