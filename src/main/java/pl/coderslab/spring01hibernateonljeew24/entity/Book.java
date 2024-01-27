@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
+import java.util.Optional;
 
 // Dla encji Book ustaw następujące ograniczenia:
 //title - minimum 5 znaków
@@ -37,6 +38,8 @@ public class Book {
     private List<Author> authors;
     @Min(2)
     private int pages;
+    @ManyToOne
+    private Category category;
 
     public Book() {
 
@@ -104,6 +107,14 @@ public class Book {
         this.pages = pages;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -111,9 +122,10 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
-                ", publisher=" + publisher +
+                ", publisher=" + publisher.getName() +
 //                ", authors=" + authors +
                 ", pages=" + pages +
+                ", category=" + Optional.ofNullable(category).map(Category::getName).orElse(null) +
                 '}';
     }
 }
