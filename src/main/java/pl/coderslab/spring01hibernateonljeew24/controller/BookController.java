@@ -2,6 +2,7 @@ package pl.coderslab.spring01hibernateonljeew24.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.spring01hibernateonljeew24.dao.AuthorDao;
 import pl.coderslab.spring01hibernateonljeew24.dao.BookDao;
@@ -10,6 +11,7 @@ import pl.coderslab.spring01hibernateonljeew24.entity.Author;
 import pl.coderslab.spring01hibernateonljeew24.entity.Book;
 import pl.coderslab.spring01hibernateonljeew24.entity.Publisher;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -109,7 +111,10 @@ public class BookController {
     }
 
     @PostMapping("/addForm")
-    public String postAddForm(@ModelAttribute Book book) {
+    public String postAddForm(@Valid @ModelAttribute Book book, BindingResult br) {
+        if(br.hasErrors()) {
+            return "/book/addOrEditForm";
+        }
         bookDao.create(book);
         return "redirect:/book";
     }
@@ -122,7 +127,10 @@ public class BookController {
     }
 
     @PostMapping("/editForm")
-    public String postEditForm(@ModelAttribute Book book) {
+    public String postEditForm(@Valid @ModelAttribute Book book, BindingResult br) {
+        if(br.hasErrors()) {
+            return "/book/addOrEditForm";
+        }
         bookDao.update(book);
         return "redirect:/book/" + book.getId();
     }
