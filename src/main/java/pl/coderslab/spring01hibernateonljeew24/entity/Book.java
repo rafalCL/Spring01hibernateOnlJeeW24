@@ -6,6 +6,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
 
+// Dla encji Book ustaw następujące ograniczenia:
+//title - minimum 5 znaków
+//rating - w przedziale 1 do 10
+//description - maksymalnie 600 znaków
+//publisher - pole wymagane
+//Rozbuduj encję o pole:
+//pages - większe od 1
+
 @Entity
 @Table(name = "books")
 public class Book {
@@ -13,18 +21,22 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Size(min=4)
     private String title;
-    @Min(0)
-    @Max(10)
-//    @Range(min = 0, max = 10)
+//    @Min(1)
+//    @Max(10)
+    @Range(min = 1, max = 10)
     private int rating;
-    @Size(max = 512)
+    @Size(max = 600)
     private String description;
     @ManyToOne
+    @NotNull
     private Publisher publisher;
     @ManyToMany
     @NotEmpty
     private List<Author> authors;
+    @Min(2)
+    private int pages;
 
     public Book() {
 
@@ -84,6 +96,14 @@ public class Book {
         this.authors = authors;
     }
 
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -93,6 +113,7 @@ public class Book {
                 ", description='" + description + '\'' +
                 ", publisher=" + publisher +
 //                ", authors=" + authors +
+                ", pages=" + pages +
                 '}';
     }
 }
