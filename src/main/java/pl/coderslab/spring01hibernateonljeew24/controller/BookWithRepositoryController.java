@@ -138,6 +138,14 @@ public class BookWithRepositoryController {
         return "redirect:/bookRepo/" + book.getId();
     }
 
+    @GetMapping("/byTitle")
+    public String getByTitlePart(@RequestParam String title, Model m) {
+        List<Book> books = bookRepository.findAllByTitleContainingIgnoreCase(title);
+        m.addAttribute("listHeader", "All Books where title contains phrase: " + title);
+        m.addAttribute("books", books);
+        return "/book/list";
+    }
+
     @ModelAttribute(name = "publishers")
     public List<Publisher> publishers() {
         return publisherDao.findAll();
