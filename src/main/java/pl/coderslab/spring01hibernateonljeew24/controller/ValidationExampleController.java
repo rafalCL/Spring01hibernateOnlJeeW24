@@ -1,8 +1,9 @@
 package pl.coderslab.spring01hibernateonljeew24.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.spring01hibernateonljeew24.entity.Book;
 
 import javax.validation.ConstraintViolation;
@@ -10,8 +11,9 @@ import javax.validation.Validator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/validation")
+@Controller
+@RequestMapping(value = "/validation", produces = "text/html;charset=utf-8")
+@ResponseBody
 public class ValidationExampleController {
     private final Validator validator;
 
