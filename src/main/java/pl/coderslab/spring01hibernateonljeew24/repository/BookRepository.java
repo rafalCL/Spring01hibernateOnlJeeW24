@@ -30,4 +30,14 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT e FROM Book e WHERE e.category = :categ")
     List<Book> myFindByCategory(@Param("categ") Category category);
     List<Book> findAllByCategoryIsNull();
+    // more examples (not tested in this project)
+    // #1
+    //     @Query("SELECT distinct b FROM Book b LEFT JOIN FETCH b.authors WHERE b.category.id = :catId ")
+    //    List<Book> findAllByCategoryIdWithAuthors(@Param("catId") Long categoryId);
+    // #2
+    //     @Query(value = "SELECT * FROM books WHERE category_id = ?1 ORDER BY title LIMIT 1", nativeQuery = true)
+    //    Book queryFirstInCategory(long catId);
+    // #3
+    //     @Query(value = "SELECT id, title FROM books WHERE id = ?1", nativeQuery = true)
+    //    List<Object[]> queryPart(long id);
 }
