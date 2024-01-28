@@ -8,12 +8,15 @@ import pl.coderslab.spring01hibernateonljeew24.dao.AuthorDao;
 import pl.coderslab.spring01hibernateonljeew24.dao.PublisherDao;
 import pl.coderslab.spring01hibernateonljeew24.entity.Author;
 import pl.coderslab.spring01hibernateonljeew24.entity.Book;
+import pl.coderslab.spring01hibernateonljeew24.entity.Category;
 import pl.coderslab.spring01hibernateonljeew24.entity.Publisher;
 import pl.coderslab.spring01hibernateonljeew24.repository.BookRepository;
+import pl.coderslab.spring01hibernateonljeew24.repository.CategoryRepository;
 
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -22,11 +25,13 @@ public class BookWithRepositoryController {
     private final BookRepository bookRepository;
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
+    private final CategoryRepository categoryRepository;
 
-    public BookWithRepositoryController(BookRepository bookRepository, PublisherDao publisherDao, AuthorDao authorDao) {
+    public BookWithRepositoryController(BookRepository bookRepository, PublisherDao publisherDao, AuthorDao authorDao, CategoryRepository categoryRepository) {
         this.bookRepository = bookRepository;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
+        this.categoryRepository = categoryRepository;
     }
 
     @PostMapping("/create")
@@ -146,6 +151,14 @@ public class BookWithRepositoryController {
         return "/book/list";
     }
 
+    @GetMapping("/myByTitle")
+    public String myByTitle(@RequestParam String title, Model m) {
+        List<Book> books = bookRepository.myFindByTitlePart(title);
+        m.addAttribute("listHeader", "All Books where title contains phrase: " + title);
+        m.addAttribute("books", books);
+        return "/book/list";
+    }
+
     @GetMapping("/byPublisher")
     public String byPublisher(@RequestParam long id, Model m) {
         Publisher publisher = publisherDao.findById(id);
@@ -167,6 +180,15 @@ public class BookWithRepositoryController {
     public String byCategoryId(@RequestParam(required = false) Long id, Model m) {
         List<Book> books = bookRepository.findAllByCategoryId(id);
         m.addAttribute("listHeader", "All Books where category id is: " + id);
+        m.addAttribute("books", books);
+        return "/book/list";
+    }
+
+    @GetMapping("/myByCategory")
+    public String myByCategory(@RequestParam(required = false) Long id, Model m) {
+        Optional<Category> optCategory = id == null ? Optional.empty() : categoryRepository.findById(id);
+        List<Book> books = optCategory.isPresent() ? bookRepository.myFindByCategory(optCategory.orElse(null)) : bookRepository.findAllByCategoryIsNull();
+        m.addAttribute("listHeader", "All Books where category is: " + optCategory.map(Category::getName).orElse("null"));
         m.addAttribute("books", books);
         return "/book/list";
     }

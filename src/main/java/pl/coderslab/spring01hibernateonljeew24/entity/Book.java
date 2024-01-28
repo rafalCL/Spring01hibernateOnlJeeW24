@@ -125,7 +125,7 @@ public class Book {
                 ", publisher=" + publisher.getName() +
 //                ", authors=" + authors +
                 ", pages=" + pages +
-                ", category=" + Optional.ofNullable(category).map(Category::getName).orElse(null) +
+                ", category=" + Optional.ofNullable(category).map(Category::getName).orElse("null") +
                 '}';
     }
 }

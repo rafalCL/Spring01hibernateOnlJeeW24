@@ -1,6 +1,8 @@
 package pl.coderslab.spring01hibernateonljeew24.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import pl.coderslab.spring01hibernateonljeew24.entity.Book;
 import pl.coderslab.spring01hibernateonljeew24.entity.Category;
 import pl.coderslab.spring01hibernateonljeew24.entity.Publisher;
@@ -19,4 +21,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByCategoryId(Long categoryId);
 //    metodę wyszukującą książki dla zadanego id publishera
     List<Book> findAllByPublisherId(long publisherId);
+    // Zadanie 1 - rozwiązywane z wykładowcą
+    //W repozytorium dla klasy Book utwórz metody pobierające dane za pomocą zapytań Query:
+    //metodę wyszukującą książki dla zadanego tytułu.
+    @Query("SELECT e FROM Book e WHERE e.title LIKE %?1%")
+    List<Book> myFindByTitlePart(String titlePart);
+    //metodę wyszukującą książki dla zadanej kategorii
+    @Query("SELECT e FROM Book e WHERE e.category = :categ")
+    List<Book> myFindByCategory(@Param("categ") Category category);
+    List<Book> findAllByCategoryIsNull();
 }
